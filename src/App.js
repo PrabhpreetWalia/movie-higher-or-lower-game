@@ -374,7 +374,10 @@ function App() {
     }
 
     if(level === 4){
-      navigate("/result", {state: {score: score}});
+      setDisabled(true)
+      setTimeout(()=>{
+        navigate("/result", {state: {score: score}});
+      }, 3000)
     }
     else{
       setLevel(level+1)

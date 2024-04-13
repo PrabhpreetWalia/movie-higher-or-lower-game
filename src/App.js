@@ -1,3 +1,4 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import "./App.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,15 @@ function App() {
   const handleResize = () => {
     setIsSmallScreen(window.innerWidth <= 600);
   }
+
+  useEffect(() => {
+    if (!is1Loading && !is2Loading){
+      setDisabled(false)
+    }
+    else if(is1Loading || is2Loading){
+      setDisabled(true)
+    }
+  }, [is1Loading, is2Loading])
 
   useEffect(() => {
     handleResize()
@@ -377,7 +387,7 @@ function App() {
       setDisabled(true)
       setTimeout(()=>{
         navigate("/result", {state: {score: score}});
-      }, 3000)
+      }, 2800)
     }
     else{
       setLevel(level+1)

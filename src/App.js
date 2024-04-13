@@ -12,6 +12,26 @@ function App() {
   const [refresh, setRefresh] = useState(true)
   const [hidden, setHidden] = useState(false)
   const [disabled, setDisabled] = useState(false)
+  const [is1Loading, set1Loading] = useState(true)
+  const [is2Loading, set2Loading] = useState(true)
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth <= 600);
+  }
+
+  useEffect(() => {
+    handleResize()
+  }, []);
+
+  useEffect(()=>{
+    console.log(isSmallScreen)
+    console.log(` ${hidden?"display-none": isSmallScreen? "display": "display-on-hover"}`)
+  }, [isSmallScreen])
+
+
+  window.addEventListener('resize', handleResize);
+
 
   const navigate = useNavigate();
 
@@ -270,6 +290,8 @@ function App() {
 
   useEffect(() => {
     setHidden(false)  
+    set1Loading(true)
+    set2Loading(true)
 
     const tempIndex1 = String(
       Math.floor(Math.random() * Math.floor(movieIds.length))
@@ -290,7 +312,9 @@ function App() {
 
   useEffect(() => {
     setDisabled(true)
-    setHidden(false) 
+    setHidden(false)
+    set1Loading(true)
+    set2Loading(true)
     
     document.querySelector(".poster--left").classList.remove("red-bg");
     document.querySelector(".poster--left").classList.remove("green-bg");
@@ -304,7 +328,9 @@ function App() {
       .then(function (response) {
         return response.json();
       })
-      .then((data) => setMovie1(data));
+      .then((data) => {setMovie1(data)
+      set1Loading(false)
+      });
 
     fetch("https://www.omdbapi.com/?apikey=44dfdf1a&i=" + movieIds[index2] + "&r=json", {
       mode: "cors",
@@ -313,7 +339,7 @@ function App() {
         return response.json();
       })
       .then((data) => {setMovie2(data)
-        console.log(data)
+        set2Loading(false)
       });
 
     setDisabled(false)
@@ -376,8 +402,8 @@ function App() {
       <h1 className="heading-big">Higher or Lower IMDB</h1>
 
       <div className="poster--container">
-        <div className="poster--left" data-poster="movie1" onClick={() => handleCheck(movie1, movie2)}> <img src={movie1.Poster} alt="" className={hidden?"display-none":""}/> <p className={` ${hidden?"display-none":"display-on-hover"}`} >{movie1.Title}</p> <p className={`rating ${hidden? "":"display-none"}`}>{movie1.Title}<br /><br /> Rating: {movie1.imdbRating}</p></div>
-        <div className="poster--right" data-poster="movie2" onClick={() => handleCheck(movie2, movie1)}> <img src={movie2.Poster} alt="" className={hidden?"display-none":""}/> <p className={` ${hidden?"display-none":"display-on-hover"}`} >{movie2.Title}</p> <p className={`rating ${hidden? "":"display-none"}`}>{movie2.Title}<br /><br /> Rating: {movie2.imdbRating}</p></div>  
+        <div className={"poster--left " + (is1Loading?"skeleton--loading":"")} data-poster="movie1" onClick={() => handleCheck(movie1, movie2)}> {!is1Loading && <><img src={movie1.Poster} alt="" className={hidden?"display-none":""}/> <p className={`${hidden?"display-none": isSmallScreen? "display": "display-on-hover"}`} >{movie1.Title}</p> <p className={`rating ${hidden? "":"display-none"}`}>{movie1.Title}<br /><br /> Rating: {movie1.imdbRating}</p></>} </div>
+        <div className={"poster--right " + (is2Loading?"skeleton--loading":"")} data-poster="movie2" onClick={() => handleCheck(movie2, movie1)}> {!is2Loading && <><img src={movie2.Poster} alt="" className={hidden?"display-none":""}/> <p className={`${hidden?"display-none": isSmallScreen? "display": "display-on-hover"}`} >{movie2.Title}</p> <p className={`rating ${hidden? "":"display-none"}`}>{movie2.Title}<br /><br /> Rating: {movie2.imdbRating}</p></>} </div>  
       </div>
 
       <div className="button--container">

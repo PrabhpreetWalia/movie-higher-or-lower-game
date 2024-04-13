@@ -289,6 +289,7 @@ function App() {
   ];
 
   useEffect(() => {
+    setDisabled(true)
     setHidden(false)  
     set1Loading(true)
     set2Loading(true)

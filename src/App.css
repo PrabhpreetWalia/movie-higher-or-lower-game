@@ -155,8 +155,9 @@
 
 @media screen and (max-width: 600px) {
   .hero{
-    height: 100vh;
+    min-height: 90vh;
   }
+  
   .poster--container{
     gap: 0;
   }

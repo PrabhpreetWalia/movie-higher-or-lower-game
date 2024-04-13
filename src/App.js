@@ -45,6 +45,18 @@ function App() {
 
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if(level === 4){
+      setDisabled(true)
+      setTimeout(()=>{
+        navigate("/result", {state: {score: score}});
+      }, 2800)
+    }
+    else{
+      setLevel(level+1)
+    }
+  }, [score])
+
   const movieIds = [
     ["tt0111161"],
     ["tt0068646"],
@@ -382,17 +394,6 @@ function App() {
     if(selected.imdbRating >= notSelected.imdbRating){
       setScore(score + 100)
     }
-
-    if(level === 4){
-      setDisabled(true)
-      setTimeout(()=>{
-        navigate("/result", {state: {score: score}});
-      }, 2800)
-    }
-    else{
-      setLevel(level+1)
-    }
-
     
     setTimeout(()=>{
 

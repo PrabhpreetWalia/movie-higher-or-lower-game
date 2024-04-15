@@ -127,6 +127,8 @@
   font-size: 1.4rem;
   padding: 1rem;
   word-wrap: break-word;
+
+  z-index: 99999;
 }
 
 .red-bg{
@@ -166,7 +168,7 @@
     min-width: 48vw;
     height: 50vh;
   }
-
+ 
   .poster--left img, .poster--right img{
     filter: blur(1px) brightness(40%);
   }
@@ -178,4 +180,48 @@
     height: 40vh;
   }
 
+}
+
+.fade-anim {
+  animation: fade--anim 1.2s ease-in-out 0s forwards;
+}
+
+@keyframes fade--anim {
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
+.fade-out{
+  animation: fade--out 0.7s ease-in-out 0s forwards;
+}
+
+@keyframes fade--out {
+  0%{
+    opacity: 1;
+  }
+
+  100%{
+    opacity: 0;
+    display: none;
+  }
+}
+
+.rating-anim{
+  animation: rate--anim 10s ease-in-out 0s forwards;
+}
+
+@keyframes rate--anim {
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+    display: none;
+  }
 }

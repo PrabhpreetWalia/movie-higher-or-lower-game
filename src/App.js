@@ -417,8 +417,8 @@ function App() {
       <h1 className="heading-big">Higher or Lower IMDB</h1>
 
       <div className="poster--container">
-        <div className={"poster--left " + (is1Loading?"skeleton--loading":"")} data-poster="movie1" onClick={() => handleCheck(movie1, movie2)}> {!is1Loading && <><img src={movie1.Poster} alt="" className={hidden?"display-none":""}/> <p className={`${hidden?"display-none": isSmallScreen? "display": "display-on-hover"}`} >{movie1.Title}</p> <p className={`rating ${hidden? "":"display-none"}`}>{movie1.Title}<br /><br /> Rating: {movie1.imdbRating}</p></>} </div>
-        <div className={"poster--right " + (is2Loading?"skeleton--loading":"")} data-poster="movie2" onClick={() => handleCheck(movie2, movie1)}> {!is2Loading && <><img src={movie2.Poster} alt="" className={hidden?"display-none":""}/> <p className={`${hidden?"display-none": isSmallScreen? "display": "display-on-hover"}`} >{movie2.Title}</p> <p className={`rating ${hidden? "":"display-none"}`}>{movie2.Title}<br /><br /> Rating: {movie2.imdbRating}</p></>} </div>  
+        <div className={"poster--left " + (is1Loading?"skeleton--loading":"")} data-poster="movie1" onClick={() => handleCheck(movie1, movie2)}> {!is1Loading && <><img src={movie1.Poster} alt="" className={`fade-anim ${hidden?"fade-out":""}`} /> <p className={`${hidden?"display-none": isSmallScreen? "display": "display-on-hover"}`} >{movie1.Title}</p> <p className={`rating ${hidden? "fade-anim":"display-none"}`}>{movie1.Title}<br /><br /> Rating: {movie1.imdbRating}</p></>} </div>
+        <div className={"poster--right " + (is2Loading?"skeleton--loading":"")} data-poster="movie2" onClick={() => handleCheck(movie2, movie1)}> {!is2Loading && <><img src={movie2.Poster} alt="" className={`fade-anim ${hidden?"fade-out":""}`}/> <p className={`${hidden?"display-none": isSmallScreen? "display": "display-on-hover"}`} >{movie2.Title}</p> <p className={`rating fade-anim ${hidden? "":"display-none"}`}>{movie2.Title}<br /><br /> Rating: {movie2.imdbRating}</p></>} </div>  
       </div>
 
       <div className="button--container">

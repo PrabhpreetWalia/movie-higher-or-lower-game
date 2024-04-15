@@ -16,11 +16,11 @@
   padding: 20px;
   border: none;
   margin: 0 1rem;
-  background: #7352a8ad;
+  background: var(--primary-color);
   font-size: 20px;
   cursor: pointer;
 }
 
 .color-primary{
-    color: #7352a8ad;
+    color: var(--primary-color);
 }
